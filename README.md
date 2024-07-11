@@ -36,6 +36,25 @@ develop内で書くシステムごとにブランチを切り、各々が開発�
 作成したvenvファイルの直下に、git cloneでgitのファイルを受け取る。
 </li></br>
 
+<p>
+ファイルのネスト例
+<pre><code>
+C
+    programing
+    some_file
+    anything_file
+    venv
+        Include
+        Lib
+        <strong>life_game</strong>
+            communicate.txt
+            EDTest.py
+            README.md
+            requirements.txt
+        Scripts
+        pyvemv.cfg
+    other_file
+</code></pre>
 <li>
 仮想環境の起動
 </li>
