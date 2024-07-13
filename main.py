@@ -1,19 +1,28 @@
 import pygame
 import sys
 
-import Field
+import fields # type: ignore
+import globals # type: ignore
+from globals import global_value as g # type: ignore
+
 
 def main():
-    pygame.init()                                 # Pygameの初期化
-    screen = pygame.display.set_mode((1000, 500))  # 1000*500の画面
+    pygame.init()# Pygameの初期化
+    globals.set_global.set_value()
+    screen = pygame.display.set_mode((g.window_X, g.window_Y))  # 1000*500の画面
 
-    field = Field.Field(screen)
-    field.setState([[1] * 1000 for i in range(500)])
+    field = fields.field_module.Field(screen)
+    ShowField = fields.Show_module.ShowField(screen)
+    SystemField = fields.System_module.SystemField(screen)
+
+    SystemField.setState([[1] * g.window_X for i in range(g.window_Y)])
+    #SystemField.updateField()
+
 
     while True:
         screen.fill((255,255,255))# 背景を白
-        field.drawLine()
-        field.drawCell()
+        ShowField.drawCell()
+        ShowField.drawLine()
 
         # 画面更新
         pygame.display.update()
