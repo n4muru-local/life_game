@@ -62,8 +62,6 @@ class Cells:
         check_col =  [self.grid_size[1]-1 if n == -1 else n for n in check_col]
 
         cnt = 0
-
-        print()
         for c_row, c_col in zip(check_row, check_col):
             print(c_row, c_col)
             if self.get_cell(c_row, c_col).state != 0: cnt += 1
@@ -76,20 +74,17 @@ class Cells:
                 state_cnt = self.count_around_cells(row, col, 1)
 
                 # 誕生条件
-                #print(state_cnt)
-                if self.get_cell(row, col) == 0:
+                if self.get_cell(row, col).state == 0:
                     if state_cnt == 3:
-                        print("birth")
                         self.get_cell(row, col).state = 1 
                 # 生存条件
-                if self.get_cell(row, col) == 1:
-                    if state_cnt==2 or state_cnt==3:
+                if self.get_cell(row, col).state == 1:
+                    if state_cnt == 2 or state_cnt == 3:
                         self.get_cell(row, col).state = 1
                     else:
                         self.get_cell(row, col).state = 0
 
     def draw(self):
-        #print(self.count_living())
         for row in range(self.grid_size[0]):
             for col in range(self.grid_size[1]):
                 self.get_cell(row, col).draw()
