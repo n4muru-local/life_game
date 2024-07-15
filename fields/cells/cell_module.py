@@ -10,18 +10,18 @@ class Cell:
 
     def draw(self):
         if self.state == 1:
-            pygame.draw.rect(self.screen, (255,0,0), (pos[0], pos[1], size, size))
+            pygame.draw.rect(self.screen, (255,0,0), (self.pos[0], self.pos[1], self.size, self.size))
         elif self.state == 2:
-            pygame.draw.rect(self.screen, (0,255,0), (pos[0], pos[1], size, size))
+            pygame.draw.rect(self.screen, (0,255,0), (self.pos[0], self.pos[1], self.size, self.size))
         elif self.state == 0:
-            pygame.draw.rect(self.screen, (255,255,255), (pos[0], pos[1], size, size))
+            pygame.draw.rect(self.screen, (0, 0, 0), (self.pos[0], self.pos[1], self.size, self.size))
 
 class Cells:
     def __init__(self, _screen, _grid_size, _cell_size):
-        self.list = self.create_cells
         self.screen = _screen
         self.grid_size = _grid_size # 縦横それぞれ何個cellが並ぶか
         self.cell_size = _cell_size
+        self.ar = self.create_cells()
     
     def create_cells(self):
         cells = []
@@ -34,37 +34,57 @@ class Cells:
             cells.append(cells_row)
         return cells
 
-    def get_cell(row, col):
-        return self.list[row, col]
+    def get_cell(self, row, col):
+        return self.ar[row][col]
     
-    def set_cell(row, col, new_cell):
-        self.list[row, col] = new_cell
+    def set_cell(self, row, col, new_cell):
+        self.ar[row][col] = new_cell
     
-    def count_around_cells(row, col, state):
+    def count_living(self):
+        cnt = 0
+        for row in range(self.grid_size[0]):
+            for col in range(self.grid_size[1]):
+                if self.get_cell(row, col).state != 0: cnt += 1
+        return cnt
+
+    def count_around_cells(self, row, col, state):
         # 周囲のあるstateであるセルをカウントする
+
         # チェックテーブルの作成
         check_row = [-1, -1, -1,  0,  0,  1,  1,  1]
         check_col = [-1,  0,  1, -1,  1, -1,  0,  1]
         check_row = [n + row for n in check_row]
         check_col = [n + col for n in check_col]
         # 端のセルは反対側を参照する
-        check_row =  [0 if n==grid_size[0] +1 else n for n in check_row]
-        check_col =  [0 if n==grid_size[1] +1 else n for n in check_col]
-        check_row =  [grid_size[0] if n == -1 else n for n in check_row]
-        check_col =  [grid_size[1] if n == -1 else n for n in check_col]
+        check_row =  [0 if n==self.grid_size[0] else n for n in check_row]
+        check_col =  [0 if n==self.grid_size[1] else n for n in check_col]
+        check_row =  [self.grid_size[0]-1 if n == -1 else n for n in check_row]
+        check_col =  [self.grid_size[1]-1 if n == -1 else n for n in check_col]
 
-        state_cnt = 0
+        cnt = 0
         for c_row, c_col in zip(check_row, check_col):
-            if self.get_cell(c_row, c_col).state == state: state_cnt += 1 
-        return state_cnt
+            print(c_row, c_col)
+            if self.get_cell(c_row, c_col).state != 0: cnt += 1
+        return cnt
 
     def update_cells_state(self):
-        for row, col in zip(range(self.grid_size[0]), range(self.grid_size[1])):
-            # 同じstateのセルが4個以上だったら，state=0にする．
-            state_cnt = count_around_cells(row, col, self.get_cell(row, col).state)
-            if state_cnt >= 4:
-                self.get_cell(row, col).state = 0
+        for row in range(self.grid_size[0]):
+            for col in range(self.grid_size[1]):
+                # 同じstateのセルが4個以上だったら，state=0にする．
+                state_cnt = self.count_around_cells(row, col, 1)
+
+                # 誕生条件
+                if self.get_cell(row, col).state == 0:
+                    if state_cnt == 3:
+                        self.get_cell(row, col).state = 1 
+                # 生存条件
+                if self.get_cell(row, col).state == 1:
+                    if state_cnt == 2 or state_cnt == 3:
+                        self.get_cell(row, col).state = 1
+                    else:
+                        self.get_cell(row, col).state = 0
 
     def draw(self):
-        for row, col in zip(range(self.grid_size[0]), range(self.grid_size[1])):
-            self.get_cell(row, col).draw()
+        for row in range(self.grid_size[0]):
+            for col in range(self.grid_size[1]):
+                self.get_cell(row, col).draw()
