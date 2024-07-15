@@ -1,7 +1,7 @@
 import pygame
 import sys, os
 sys.path.append(os.pardir)
-import fields.cells as cells
+import fields.cells as cl
 
 def test_cells():
     pygame.init() # Pygameの初期化
@@ -9,16 +9,16 @@ def test_cells():
     window_height = 500
     screen = pygame.display.set_mode((window_width, window_height))  # 1000*500の画面
 
-    cl = cells.Cells(screen, (100, 50), 10)
-    cl.get_cell(20, 20).state = 1
-    cl.get_cell(20, 21).state = 1
-    cl.get_cell(21, 19).state = 1
-    cl.get_cell(22, 20).state = 1
+    cells = cl.Cells(screen, (100, 50), 10)
+    cells.get_cell(20, 20).state = 1
+    cells.get_cell(20, 21).state = 1
+    cells.get_cell(21, 19).state = 1
+    cells.get_cell(22, 20).state = 1
 
     while True:
         screen.fill((255,255,255))# 背景を白
-        cl.update_cells_state()
-        cl.draw()
+        cells.update_cells_state()
+        cells.draw()
 
         # 画面更新
         pygame.display.update()
