@@ -61,7 +61,7 @@ class Field:
                     pygame.draw.rect(self.screen,(255,0,0), (pos_x, pos_y, size, size))
                 elif self.Cell_state[y][x] == 2:
                     pygame.draw.rect(self.screen,(0,255,0), (pos_x, pos_y, size, size))
-                    
+    
     def updateField(self):
         newField = self.getState().copy()
         chex = [-1, 0, 1,-1, 1,-1, 0, 1]
