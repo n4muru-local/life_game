@@ -1,2 +1,2 @@
-from .cell_module1 import Cell
-from .cell_module1 import Cells
+from .cell_module import Cell
+from .cell_module import Cells
