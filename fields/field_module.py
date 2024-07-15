@@ -1,5 +1,7 @@
 import pygame
 
+from . import cells
+
 class Field:
     def __init__(self, _screen):
         self.screen = _screen

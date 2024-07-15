@@ -14,14 +14,14 @@ def main():
     field = fields.field_module.Field(screen)
     
 
-    instant_state = [[0] * g.window_X for i in range(g.window_Y)]
+    instant_state = [[1] * g.window_X for i in range(g.window_Y)]
     instant_state[100][100] = 1
     instant_state[100][101] = 1
     instant_state[101][99] = 1
     instant_state[101][100] = 1
     instant_state[102][100] = 1
     field.setState(instant_state)
-    field.printState()
+    #field.printState()
     #field.updateField()
 
 
