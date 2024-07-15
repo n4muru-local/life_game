@@ -23,10 +23,12 @@ class Cells:
     def create_cells(self):
         cells = []
         for x in range(self.grid_size[0]):
+            row = []
             for y in range(self.grid_size[1]):
                 pos = (x * self.cell_size, y * self.cell_size)
                 cell = Cell(self.screen, self.cell_size, pos, 0)
-                cells.append(cell)
+                row.append(cell)
+            cells.append(row)
         return cells
 
     def get_cell(x, y):
