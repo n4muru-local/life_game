@@ -37,6 +37,14 @@ class Cells:
     def set_cell(x, y, new_cell):
         self.list[x, y] = new_cell
     
+    def check_around_cells(x,y):
+        check_x = [-1, -1, -1,  0,  0,  1,  1,  1]
+        check_y = [-1,  0,  1, -1,  1, -1,  0,  1]
+        check_count = 0
+        for c_x, c_y in zip(check_x, check_y):
+            if self.get_cell(c_x, c_y).state == 1: count += 1 
+        return check_count
+
     def draw(self):
         for cell in self.list:
             cell.draw()
