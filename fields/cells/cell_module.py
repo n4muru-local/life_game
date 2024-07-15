@@ -64,7 +64,7 @@ class Cells:
         cnt = 0
         for c_row, c_col in zip(check_row, check_col):
             print(c_row, c_col)
-            if self.get_cell(c_row, c_col).state != 0: cnt += 1
+            if self.get_cell(c_row, c_col).state == state: cnt += 1
         return cnt
 
     def update_cells_state(self):
