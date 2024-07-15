@@ -12,17 +12,23 @@ def main():
     screen = pygame.display.set_mode((g.window_X, g.window_Y))  # 1000*500の画面
 
     field = fields.field_module.Field(screen)
-    ShowField = fields.Show_module.ShowField(screen)
-    SystemField = fields.System_module.SystemField(screen)
+    
 
-    SystemField.setState([[1] * g.window_X for i in range(g.window_Y)])
-    #SystemField.updateField()
+    instant_state = [[0] * g.window_X for i in range(g.window_Y)]
+    instant_state[100][100] = 1
+    instant_state[100][101] = 1
+    instant_state[101][99] = 1
+    instant_state[101][100] = 1
+    instant_state[102][100] = 1
+    field.setState(instant_state)
+    field.printState()
+    #field.updateField()
 
 
     while True:
         screen.fill((255,255,255))# 背景を白
-        ShowField.drawCell()
-        ShowField.drawLine()
+        field.drawCell()
+        field.drawLine()
 
         # 画面更新
         pygame.display.update()
