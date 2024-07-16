@@ -7,6 +7,10 @@ class Cell:
         self.size = _size
         self.pos = _pos
         self.state = _state
+        self.next_state = self.state 
+
+    def update_state(self):
+        self.state = self.next_state
 
     def draw(self):
         if self.state == 1:
@@ -66,24 +70,28 @@ class Cells:
             print(c_row, c_col)
             if self.get_cell(c_row, c_col).state == state: cnt += 1
         return cnt
-
+        
     def update_cells_state(self):
+        # 次の状態を決定
         for row in range(self.grid_size[0]):
             for col in range(self.grid_size[1]):
-                # 同じstateのセルが4個以上だったら，state=0にする．
                 state_cnt = self.count_around_cells(row, col, 1)
 
-                # 誕生条件
                 if self.get_cell(row, col).state == 0:
+                    # 誕生条件
                     if state_cnt == 3:
-                        self.get_cell(row, col).state = 1 
-                # 生存条件
-                if self.get_cell(row, col).state == 1:
+                        self.get_cell(row, col).next_state = 1 
+                elif self.get_cell(row, col).state == 1:
+                    # 生存条件
                     if state_cnt == 2 or state_cnt == 3:
-                        self.get_cell(row, col).state = 1
+                        self.get_cell(row, col).next_state = 1
                     else:
-                        self.get_cell(row, col).state = 0
-
+                        self.get_cell(row, col).next_state = 0
+        # 次の状態に更新
+        for row in range(self.grid_size[0]):
+            for col in range(self.grid_size[1]):
+                self.get_cell(row, col).update_state()
+                
     def draw(self):
         for row in range(self.grid_size[0]):
             for col in range(self.grid_size[1]):
