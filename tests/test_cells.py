@@ -12,14 +12,15 @@ def test_cells():
     cells = cl.Cells(screen, (100, 50), 10)
     cells.get_cell(20, 20).state = 1
     cells.get_cell(20, 21).state = 1
-    cells.get_cell(21, 19).state = 1
+    cells.get_cell(21, 20).state = 1
+    cells.get_cell(21, 22).state = 1
     cells.get_cell(22, 20).state = 1
 
     while True:
         screen.fill((255,255,255))# 背景を白
         cells.update_cells_state()
         cells.draw()
-
+        
         # 画面更新
         pygame.display.update()
 
