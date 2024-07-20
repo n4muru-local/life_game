@@ -36,7 +36,7 @@
 
     """[summary]
 
-    Parameters
+    Parameters  or  Attributes
     ----------
     arg1 : [type]
         [description]
