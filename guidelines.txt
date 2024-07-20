@@ -1,0 +1,61 @@
+各項
+１，命名規則
+
+
+
+
+
+
+１，命名規則
+    定数　　：スネークケース(snake_case)
+    定数引数　　：_スネークケース(_snake_case)
+    変数　　：oneword
+    値を参照しないfor文: for _ in range(100)  
+
+
+    関数名 　：キャメルケース(camelCase)
+    クラス名　：パスカルケース(PascalCase)
+    クラスファイル名(.py)：クラス名_module
+    クラスフォルダ名　　　：クラス名s
+
+２，Docstring
+    関数、クラスには必須項目とする。
+    ルール
+    ・1行は72文字まで
+    ・モジュールの場合、import文はコメントの直後に記述
+    ・outline(概要)は1行、Attributes(詳細説明)の複数行を記述
+    ・概要は一行のみ簡潔に記述
+    ・複数行の場合は、空行を挟んで説明を記述
+    ・docstringと対象定義の間に空行を挟まない
+    ・モジュールの場合は、公開するクラス、関数などについて
+    　1行の説明を付けて一覧化
+    ・クラスの場合は、何をするクラスなのかの概要、
+    　外部に公開するメソッドやインスタンス変数などを記述
+    ・クラスの場合は、冒頭ではdocstringとの間に空行を挟む
+    ・関数の場合は、何をするのかの概要、パラメータ、戻り値、発生する例外などについて記述
+
+    """[summary]
+
+    Parameters
+    ----------
+    arg1 : [type]
+        [description]
+    arg2 : int
+        [description]
+    arg3 : int, optional
+        [description], by default 1
+
+    Returns
+    -------
+    [type]
+        [description]
+
+    Raises
+    ------
+    TypeError
+        [description]
+
+    note
+    ------
+        なんでも
+    """

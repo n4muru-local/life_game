@@ -5,31 +5,27 @@ import fields # type: ignore
 import globals # type: ignore
 from globals import global_value as g # type: ignore
 
-
 def main():
     pygame.init()# Pygameの初期化
     globals.set_global.set_value()
     screen = pygame.display.set_mode((g.window_X, g.window_Y))  # 1000*500の画面
 
     field = fields.field_module.Field(screen)
-    
 
-    instant_state = [[1] * g.window_X for i in range(g.window_Y)]
-    instant_state[100][100] = 1
-    instant_state[100][101] = 1
-    instant_state[101][99] = 1
-    instant_state[101][100] = 1
-    instant_state[102][100] = 1
-    field.setState(instant_state)
-    #field.printState()
-    #field.updateField()
+    field.getCell(20, 20).set(1)
+    field.getCell(20, 21).set(1)
+    field.getCell(21, 20).set(1)
+    field.getCell(21, 22).set(1)
+    field.getCell(22, 20).set(1)
+
 
 
     while True:
         screen.fill((255,255,255))# 背景を白
         field.drawCell()
         field.drawLine()
-
+        field.update_cells_state()
+        
         # 画面更新
         pygame.display.update()
 
