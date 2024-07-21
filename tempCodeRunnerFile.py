@@ -1,5 +1,0 @@
-field.getCell(20, 20).set(1)
-    field.getCell(20, 21).set(1)
-    field.getCell(21, 20).set(1)
-    field.getCell(21, 22).set(1)
-    field.getCell(22, 20).set(1)
