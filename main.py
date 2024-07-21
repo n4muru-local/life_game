@@ -12,11 +12,14 @@ def main():
 
     field = fields.field_module.Field(screen)
 
-    field.getCell(20, 20).set(1)
-    field.getCell(20, 21).set(1)
-    field.getCell(21, 20).set(1)
-    field.getCell(21, 22).set(1)
-    field.getCell(22, 20).set(1)
+    
+    
+    glider = [
+        [1, 1, 0],
+        [1, 0, 1],
+        [1, 0, 0]
+    ]
+    field.setArray(glider,20,20)
 
 
 
