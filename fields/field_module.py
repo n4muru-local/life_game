@@ -70,6 +70,33 @@ class Field:
         """
         return self.cells[row][col]
     
+    def setArray(self, _array ,pos_x, pos_y):
+        """配列でfieldをセットする
+
+        Parameters
+        ----------
+        _array : list
+            指定する配列
+        pos_x : int
+            配列を設定するX座標
+        pos_y : int
+            配列を設定するY座標
+
+        Raises
+        ------
+        Exception
+            指定した座標に配列を入れるとFieldを超える場合に出力
+        """
+        if len(_array)+pos_y > self.grid_col:
+            raise Exception("out of range col \n配列がField範囲を超えています")
+        for y in range(len(_array)):
+            if len(_array[y]) + pos_x > self.grid_row:
+                raise Exception("out of range row \n配列がField範囲を超えています")
+            for x in range(len(_array[y])):
+                self.getCell(pos_x + x,pos_y + y).state = _array[y][x]
+        print("successfully entered")
+        
+    
     def count_around_cells(self, row, col, _state):
         """特定のcellに隣接する8マスの情報をカウントする。
 
