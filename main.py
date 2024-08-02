@@ -2,15 +2,17 @@ import pygame
 import sys
 
 import fields # type: ignore
-import globals # type: ignore
-from globals import global_value as g # type: ignore
+import players # type: ignore
+
+window_X = 1000
+window_Y = 500
 
 def main():
     pygame.init()# Pygameの初期化
-    globals.set_global.set_value()
-    screen = pygame.display.set_mode((g.window_X, g.window_Y))  # 1000*500の画面
+    screen = pygame.display.set_mode((window_X, window_Y))  # 1000*500の画面
 
     field = fields.field_module.Field(screen)
+    n4muru = players.player_module.player(1,(255,200,200),(150,150),200)
 
     
     
@@ -26,7 +28,11 @@ def main():
     while True:
         screen.fill((255,255,255))# 背景を白
         field.drawCell()
+        field.drawPlayers()
         field.drawLine()
+
+
+
         field.update_cells_state()
         
         # 画面更新

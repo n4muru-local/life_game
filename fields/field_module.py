@@ -182,3 +182,7 @@ class Field:
             pygame.draw.line(self.screen, (0,0,0), (0,row), (self.Window_X,row), 1)
         for col in range(0,self.Window_X,self.cell_size):
             pygame.draw.line(self.screen, (0,0,0), (col,0), (col,self.Window_Y), 1)
+
+    def drawPlayers(self):
+        pygame.draw.rect(self.screen, (255,230,230,100),(50,50,300,300))
+        pygame.draw.rect(self.screen, (230,255,230,100),(550,50,300,300))
